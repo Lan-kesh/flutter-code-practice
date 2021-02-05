@@ -1,12 +1,15 @@
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:i_am_poor/drawer_list_item.dart';
+
+import '../drawer_list_item.dart';
 
 class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF259990),
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
@@ -46,97 +49,106 @@ class MyHomePage extends StatelessWidget {
           ),
         ],
       ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            DrawerHeader(
-              child: Container(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 10,
-                ),
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.black),
-                  borderRadius: BorderRadius.circular(30),
-                ),
-                child: Row(
-                  //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    RawMaterialButton(
-                        shape: CircleBorder(),
-                        elevation: 5.0,
-                        padding: EdgeInsets.all(3),
-                        fillColor: Colors.white,
-                        child: CircleAvatar(
-                          backgroundImage: AssetImage('assets/lake.jpg'),
-                          radius: 30,
-                        ),
-                        onPressed: null),
-                    SizedBox(
-                      width: 15,
+      drawer: SafeArea(
+        child: BackdropFilter(
+          filter: ImageFilter.blur(
+            sigmaX: 5.0,
+            sigmaY: 5.0,
+          ),
+          child: Padding(
+            padding: EdgeInsets.all(10),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(30),
+              child: Drawer(
+                child: Column(mainAxisSize: MainAxisSize.max, children: [
+                  DrawerHeader(
+                    child: Container(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 10,
+                      ),
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.black),
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      child: Row(
+                        //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Card(
+                            elevation: 10,
+                            shape: CircleBorder(),
+                            clipBehavior: Clip.antiAlias,
+                            child: CircleAvatar(
+                              backgroundImage: AssetImage('assets/lake.jpg'),
+                              radius: 30,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 15,
+                          ),
+                          Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(top: 10),
+                                child: Text('MY Names'),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(top: 10),
+                                child: Text('email'),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            width: 15,
+                          ),
+                          Icon(Icons.keyboard_arrow_down)
+                        ],
+                      ),
                     ),
-                    Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                    ),
+                  ),
+                  Expanded(
+                    child: ListView(
+                      padding: EdgeInsets.zero,
                       children: [
-                        Padding(
-                          padding: EdgeInsets.only(top: 10),
-                          child: Text('MY Names'),
+                        DrawerItem(
+                          itemIcon: Icon(Icons.home),
+                          itemText: 'Home',
                         ),
-                        Padding(
-                          padding: EdgeInsets.only(top: 10),
-                          child: Text('email'),
+                        DrawerItem(
+                          itemIcon: Icon(Icons.home),
+                          itemText: 'Donate',
+                        ),
+                        DrawerItem(
+                          itemIcon: Icon(Icons.rate_review),
+                          itemText: 'Rate the app',
+                        ),
+                        DrawerItem(
+                          itemIcon: Icon(Icons.login),
+                          itemText: 'Login Setting ',
+                        ),
+                        DrawerItem(
+                          itemIcon: Icon(Icons.sync),
+                          itemText: 'Synchronization',
+                        ),
+                        DrawerItem(
+                          itemIcon: Icon(Icons.wb_sunny),
+                          itemText: 'Night Mode',
                         ),
                       ],
                     ),
-                    SizedBox(
-                      width: 15,
-                    ),
-                    Icon(Icons.navigate_next_sharp),
-                  ],
-                ),
-              ),
-              decoration: BoxDecoration(
-                color: Colors.white,
+                  ),
+                  Container(
+                    padding: EdgeInsets.all(40),
+                    child: Text('Sign Out'),
+                  ),
+                ]),
               ),
             ),
-            DrawerItem(
-              itemIcon: Icon(Icons.home),
-              itemText: 'Home',
-            ),
-            DrawerItem(
-              itemIcon: Icon(Icons.home),
-              itemText: 'Donate',
-            ),
-            DrawerItem(
-              itemIcon: Icon(Icons.rate_review),
-              itemText: 'Rate the app',
-            ),
-            DrawerItem(
-              itemIcon: Icon(Icons.login),
-              itemText: 'Login Setting ',
-            ),
-            DrawerItem(
-              itemIcon: Icon(Icons.sync),
-              itemText: 'Synchronization',
-            ),
-            DrawerItem(
-              itemIcon: Icon(Icons.wb_sunny),
-              itemText: 'Night Mode',
-            ),
-            DrawerItem(
-              itemIcon: Icon(Icons.wb_sunny),
-              itemText: 'Night Mode',
-            ),
-            DrawerItem(
-              itemIcon: Icon(Icons.wb_sunny),
-              itemText: 'Night Mode',
-            ),
-            DrawerItem(
-              itemIcon: Icon(Icons.wb_sunny),
-              itemText: 'Night Mode',
-            ),
-          ],
+          ),
         ),
       ),
     );
